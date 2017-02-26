@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="quizApp">
+<head>
+  <meta charset="utf-8" />
+  <title>Cricket Trivia</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js">
+  </script>
+  <script src="Chart.min.js"></script>
+  <script src="angular-chart.min.js"></script>
+  <script src="app.js"></script>
+</head>
+
+<body>
+  <div class="container" ng-controller="quizCtrl">
+    <h1 class="title">Cricket Trivia</h1>
+    <div class="container-left">
+    <form name="quiz">
+       <div class="quiz-block" ng-repeat="q in questions">
+          <h2 class="quiz-q">{{q.question}}</h2>
+          <div class="quiz-a">Ans: <select id="mySelect" name="qid" ng-model="ddlques" ng-options="x for x in q.options" required ng-change="GetValue(ddlques)">
+          </select>
+          <span class="wrong">{{q.result}}</span>
+          </div>
+        </div>
+       <p></p>
+       <button ng-click="submit()" ng-disabled="quiz.qid.$error.required">Submit</button>
+       &nbsp;&nbsp;
+       <button ng-click="reset(quiz)">Clear Values</button>
+    </form>
+    </div>
+
+    <div class="container-right">
+    <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series">
+    </canvas>
+    </div>
+  </div>
+</body>
+
+</html>
